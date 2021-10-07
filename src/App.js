@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Card from "./components/Card";
+import Container from "./components/Container";
+import Formulario from "./components/Formulario";
 
-function App() {
+
+const App = () => 
+{
+  
+  const [ users, setUsers ] = useState([]);
+  const handleUsuarios = ( user ) =>
+  {
+    setUsers([ ...users, user ])
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    
+    <Container>
+      
+      <Card>
+        
+        <Formulario handleUsuarios={ handleUsuarios } />
+      
+      </Card>
+
+      <Card>
+
+        <ul>
+          
+          { 
+            users.map( ( u, i ) => 
+            
+            <li key={i}>{`Nombre : ${u.firstName} ${u.lastName} || Email :  ${ u.email }`}</li> 
+
+          )}
+        
+        </ul>
+
+      </Card>
+
+    </Container>
+  )
+
 }
 
-export default App;
+export default App
